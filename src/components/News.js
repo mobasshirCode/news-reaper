@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import Spinner from "./Spinner";
 
 export default class News extends Component {
   constructor() {
@@ -11,12 +12,14 @@ export default class News extends Component {
     };
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=8872901d422b46ccaff1d40589029842&page=${this.state.page}&pageSize=15`;
+    this.setState({loading : true})
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=8872901d422b46ccaff1d40589029842&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
+      loading :false
     });
   }
   // handlePrev = () => {
@@ -36,29 +39,31 @@ export default class News extends Component {
   handlePrev = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=8872901d422b46ccaff1d40589029842&page=${
       this.state.page - 1
-    }&pageSize=15`;
+    }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({ articles: parsedData.articles, page: this.state.page - 1 });
   };
   handleNext = async () => {
+    this.setState({loading : true})
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=8872901d422b46ccaff1d40589029842&page=${
       this.state.page + 1
-    }&pageSize=15`;
+    }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, page: this.state.page + 1 });
+    this.setState({ articles: parsedData.articles, page: this.state.page + 1 ,loading : false });
   };
   render() {
     return (
       <div className="container my-2">
-        <h3>News Reaper - Top Headlines</h3>
-        <div className="row my-3 d-flex justify-content-between">
+        <h1 className="text-center">News Reaper - Top Headlines</h1>
+        {this.state.loading && <Spinner/>}
+        <div className="row my-3 ">
           {this.state.articles.map((element) => {
             return (
               <div className="col-md-4 my-3" key={element.url}>
                 <NewsItem
-                  title={element.title ? element.title.slice(0, 45) : ""}
+                  title={this.state.loading && element.title ? element.title.slice(0, 45) : ""}
                   description={element.description ? element.description : ""}
                   newsUrl={element.url}
                   imageUrl={
@@ -82,7 +87,7 @@ export default class News extends Component {
           </button>
           <button
             disabled={
-              this.state.page + 1 > Math.ceil(this.state.totalResults / 15)
+              this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSiz)
             }
             type="button"
             className="btn btn-dark"
