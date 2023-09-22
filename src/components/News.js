@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 
+const apiKey1 = "8872901d422b46ccaff1d40589029842";
+const apiKey2 = "8f59f1d0c9ca4d8da82432d9348f5181";
+
 export default class News extends Component {
   constructor() {
     super();
@@ -11,9 +14,9 @@ export default class News extends Component {
       page: 1,
     };
   }
-  async componentDidMount() {
+  async updateNews() {
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=8872901d422b46ccaff1d40589029842&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${apiKey2}&category=${this.props.category}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({
@@ -22,44 +25,16 @@ export default class News extends Component {
       loading: false,
     });
   }
-  // handlePrev = () => {
-  //   this.componentDidMount(
-  //     this.setState({
-  //       page: this.state.page - 1,
-  //     })
-  //   );
-  // };
-  // handleNext = () => {
-  //   this.componentDidMount(
-  //     this.setState({
-  //       page: this.state.page + 1,
-  //     })
-  //   );
-  // };
+  async componentDidMount() {
+    this.updateNews();
+  }
   handlePrev = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=${
-      this.props.category
-    }&apiKey=8872901d422b46ccaff1d40589029842&page=${
-      this.state.page - 1
-    }&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, page: this.state.page - 1 });
+    await this.setState({ page: this.state.page - 1 });
+    this.updateNews();
   };
   handleNext = async () => {
-    this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=${
-      this.props.category
-    }&apiKey=8872901d422b46ccaff1d40589029842&page=${
-      this.state.page + 1
-    }&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({
-      articles: parsedData.articles,
-      page: this.state.page + 1,
-      loading: false,
-    });
+    await this.setState({ page: this.state.page + 1 });
+    this.updateNews();
   };
   render() {
     return (
