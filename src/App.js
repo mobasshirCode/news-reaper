@@ -8,7 +8,7 @@ import About from "./components/About";
 
 
 export default class App extends Component {
-  pageSize=5;
+  pageSize=15;
   render() {  
     return (
       <>

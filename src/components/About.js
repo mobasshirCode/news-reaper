@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About(props) {
 
-  document.title = "Word Wiz - About";
+  document.title = "About - News Reaper";
   let myStyle = {
     color: props.mode === "light" ? "#030a24" : "#d4ddfa",
     backgroundColor: props.mode === "light" ? "#d4ddfa" : "#030a24",
@@ -130,7 +130,7 @@ export default function About(props) {
                 aria-expanded="false"
                 aria-controls="collapseFour"
               >
-                Thank You for Choosing Word Wiz
+                Thank You for Choosing News Reaper
               </button>
             </h2>
             <div
@@ -140,7 +140,7 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                We appreciate your trust in Word Wiz. <br /> Our mission is to
+                We appreciate your trust in News Reaper. <br /> Our mission is to
                 provide you with a powerful and user-friendly text analysis
                 tool. <br />
                 Here's a quick recap : <br />
@@ -148,7 +148,7 @@ export default function About(props) {
                 Meet our dedicated team. <br />
                 Stay connected with our community and support. <br />
                 <br />
-                Ready to get started? Try <strong>Word Wiz</strong> today and
+                Ready to get started? Try <strong>News Reaper</strong> today and
                 take your text analysis to the next level. <br />
                 Thank you for being a part of our journey!
               </div>
