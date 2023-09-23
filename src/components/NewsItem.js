@@ -10,22 +10,24 @@ const NewsItem = (props) => {
         >
           {props.source}
         </span>
-        <img src={props.imageUrl} className="card-img-top" alt="..." />
+        <img src={props.imageUrl} className="card-img-top" alt="..." style={{height : "210px", objectFit: "cover"}} />
         <div
           className="card-body "
           style={{
-            backgroundColor: props.mode === "dark" ? "#04134a" : "white",
+            backgroundColor: props.mode === "dark" ? "#060c36" : "white",
             color: props.mode === "dark" ? "white" : "black",
+            height: "280px",
+            
           }}
         >
           <h5 className="card-title">{props.title}</h5>
           <p className="card-text">{props.description}...</p>
           <p className="card-text">
             <small
-              className="text-body-secondary"
               style={{
-                backgroundColor: props.mode === "dark" ? "#04134a" : "white",
-                color: props.mode === "dark" ? "white" : "black",
+                color : "grey",
+                position: "absolute",
+                bottom: "50px"
               }}
             >
               By {props.author} on {new Date(props.date).toLocaleString()}
@@ -33,8 +35,10 @@ const NewsItem = (props) => {
           </p>
           <a
             style={{
-              backgroundColor: props.mode === "dark" ? "black" : "white",
-              color: props.mode === "dark" ? "white" : "black",
+              backgroundColor: props.mode === "dark" ? "white" : "black",
+              color: props.mode === "dark" ? "black" : "white",
+              position : "absolute",
+              bottom : "10px"
             }}
             rel="noreferrer"
             href={props.newsUrl}

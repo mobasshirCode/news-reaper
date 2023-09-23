@@ -64,7 +64,7 @@ const News = (props) => {
                     title={element.title ? element.title : ""}
                     description={
                       element.description
-                        ? element.description.slice(0, 200)
+                        ? element.description.slice(0, 100)
                         : ""
                     }
                     newsUrl={element.url}

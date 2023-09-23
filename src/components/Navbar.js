@@ -5,7 +5,7 @@ const Navbar = (props) => {
   return (
     <div>
       <nav
-        className={`navbar navbar-expand-lg bg-${
+        className={`navbar fixed-top navbar-expand-lg bg-${
           props.mode === "light" ? "light" : ""
         } navbar-${props.mode} `}
       >
