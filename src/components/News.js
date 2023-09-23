@@ -3,7 +3,7 @@ import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const apiKey1 = "8872901d422b46ccaff1d40589029842";
+// const apiKey1 = "8872901d422b46ccaff1d40589029842";
 const apiKey2 = "8f59f1d0c9ca4d8da82432d9348f5181";
 
 export default class News extends Component {
@@ -22,18 +22,19 @@ export default class News extends Component {
     document.title = `${this.capitalize(this.props.category)}  - News Reaper`;
   }
   async updateNews() {
-    this.setState({ loading: true });
-    {
-      this.state.loading && <Spinner />;
-    }
+   this.props.setProgress(10);
     let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${apiKey2}&category=${this.props.category}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setProgress(30);
     let parsedData = await data.json();
+    this.props.setProgress(60);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     });
+    this.props.setProgress(100);
   }
   async componentDidMount() {
     this.updateNews();
