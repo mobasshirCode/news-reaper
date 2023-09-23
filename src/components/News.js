@@ -1,96 +1,88 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
-
-export default class News extends Component {
-  capitalize = (string) => {
+const News = (props) => {
+  const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [],
-      loading: false,
-      page: 1,
-      totalResults: 0,
-    };
-    document.title = `${this.capitalize(this.props.category)}  - News Reaper`;
-  }
-  async updateNews() {
-   this.props.setProgress(10);
-    let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${this.props.apiKey}&category=${this.props.category}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true });
-    let data = await fetch(url);
-    this.props.setProgress(30);
-    let parsedData = await data.json();
-    this.props.setProgress(60);
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-      loading: false,
-    });
-    this.props.setProgress(100);
-  }
-  async componentDidMount() {
-    this.updateNews();
-  }
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
 
-  fetchData = async () => {
-    this.setState({ page: this.state.page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${this.props.apiKey}&category=${
-      this.props.category
-    }&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+  const updateNews = async () => {
+    props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${props.apiKey}&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
+    setLoading(true);
+    let data = await fetch(url);
+    props.setProgress(30);
+    let parsedData = await data.json();
+    props.setProgress(60);
+    setArticles(parsedData.articles);
+    setTotalResults(parsedData.totalResults);
+    setLoading(false);
+    props.setProgress(100);
+  };
+  useEffect(() => {
+    document.title = `${capitalize(props.category)}  - News Reaper`;
+    updateNews();
+    //eslint-disable-next-line
+  }, []);
+
+  const fetchData = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?&country=in&apikey=${
+      props.apiKey
+    }&category=${props.category}&page=${page + 1}&pageSize=${props.pageSize}`;
+    setPage(page + 1);
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
-      totalResults: parsedData.totalResults,
-    });
+    setArticles(articles.concat(parsedData.articles));
+    setTotalResults(parsedData.totalResults);
   };
-  render() {
-    return (
-      <>
-        <h1 className="text-center" style={{ margin: "30px 0" }}>
-          News Reaper - Top {this.capitalize(this.props.category)} Headlines
-        </h1>
-        {this.state.loading && <Spinner />}
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
-          next={this.fetchData}
-          hasMore={this.state.articles.length !== this.state.totalResults}
-          loader={<Spinner />}
-        >
-          <div className="container my-2">
-            <div className="row my-3 ">
-              {this.state.articles.map((element) => {
-                return (
-                  <div className="col-md-4 my-3" key={element.url}>
-                    <NewsItem
-                      title={element.title ? element.title.slice(0, 45) : ""}
-                      description={
-                        element.description ? element.description : ""
-                      }
-                      newsUrl={element.url}
-                      imageUrl={
-                        element.urlToImage
-                          ? element.urlToImage
-                          : "https://thumbs.dreamstime.com/b/newspaper-wooden-table-93401143.jpg"
-                      }
-                      author={element.author ? element.author : "Unknown"}
-                      date={element.publishedAt}
-                      source={element.source.name}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+  return (
+    <>
+      <h1 className="text-center" style={{ margin: "90px 0px 10px 0px" }}>
+        News Reaper - Top {capitalize(props.category)} Headlines
+      </h1>
+      {loading && <Spinner />}
+      <InfiniteScroll
+        dataLength={articles.length}
+        next={fetchData}
+        hasMore={articles.length !== totalResults}
+        loader={<Spinner />}
+      >
+        <div className="container my-2">
+          <div className="row my-3 ">
+            {articles.map((element) => {
+              return (
+                <div className="col-md-4 my-3" key={element.url}>
+                  <NewsItem
+                    title={element.title ? element.title : ""}
+                    description={
+                      element.description
+                        ? element.description.slice(0, 200)
+                        : ""
+                    }
+                    newsUrl={element.url}
+                    imageUrl={
+                      element.urlToImage
+                        ? element.urlToImage
+                        : "https://thumbs.dreamstime.com/b/newspaper-wooden-table-93401143.jpg"
+                    }
+                    author={element.author ? element.author : "Unknown"}
+                    date={element.publishedAt}
+                    source={element.source.name}
+                  />
+                </div>
+              );
+            })}
           </div>
-        </InfiniteScroll>
-      </>
-    );
-  }
-}
+        </div>
+      </InfiniteScroll>
+    </>
+  );
+};
+export default News;
