@@ -60,6 +60,7 @@ const News = (props) => {
               return (
                 <div className="col-md-4 my-3" key={element.url}>
                   <NewsItem
+                    mode={props.mode}
                     title={element.title ? element.title : ""}
                     description={
                       element.description

@@ -4,8 +4,8 @@ export default function About(props) {
 
   document.title = "About - News Reaper";
   let myStyle = {
-    // color: props.mode === "light" ? "#030a24" : "#d4ddfa",
-    // backgroundColor: props.mode === "light" ? "#d4ddfa" : "#030a24",
+    color: props.mode === "light" ? "#030a24" : "#d4ddfa",
+    backgroundColor: props.mode === "light" ? "#d4ddfa" : "#030a24",
   };
 
   return (

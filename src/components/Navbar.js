@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div>
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <nav
+        className={`navbar navbar-expand-lg bg-${
+          props.mode === "light" ? "light" : ""
+        } navbar-${props.mode} `}
+      >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             News Reaper
@@ -68,6 +72,25 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
+            <div
+              className={`form-check form-switch text-${
+                props.mode === "light" ? "dark" : "light"
+              }`}
+            >
+              <input
+                className="form-check-input"
+                type="checkbox"
+                onClick={props.toggleBtn}
+                role="switch"
+                id="flexSwitchCheckDefault"
+              />
+              <label
+                className="form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Dark Mode
+              </label>
+            </div>
           </div>
         </div>
       </nav>
