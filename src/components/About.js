@@ -4,14 +4,14 @@ export default function About(props) {
 
   document.title = "About - News Reaper";
   let myStyle = {
-    color: props.mode === "light" ? "#030a24" : "#d4ddfa",
-    backgroundColor: props.mode === "light" ? "#d4ddfa" : "#030a24",
+    color: props.mode === "light" ? "#030a24" : "white",
+    backgroundColor: props.mode === "light" ? "#d4ddfa" : "#162533",
   };
 
   return (
     <>
       <div className="container" style={myStyle}>
-        <h1 className="my-3">About us</h1>
+        <h1 className="my-3">About News Reaper</h1>
         <div className="accordion" id="accordionExample">
           <div className="accordion-item" style={{ border: "1px solid white" }}>
             <h2 className="accordion-header">
@@ -24,7 +24,7 @@ export default function About(props) {
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                Introduction to the App
+                Introduction to News Reaper
               </button>
             </h2>
             <div
@@ -34,28 +34,26 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                <strong>Welcome to our Text Analyzer App!</strong>
+                <strong>Welcome to News Reaper!</strong>
                 <br />
-                Our Text Analyzer App is a powerful tool designed to make your
-                text-related tasks easier and more efficient. Whether you're a
-                writer, student, or professional, our app has something to offer
-                you. Here are some key features:
+                News Reaper is your trusted source for the latest headlines and news stories. We bring you the news you need to know, powered by the NewAPI API.
                 <br />
-                <strong>Word Count :</strong> Quickly find out how many words
-                are in your text. <br />
-                <strong>Character Count :</strong> Count the total number of
-                characters with just a click. <br />
-                <strong>Estimated Reading Time :</strong> Get an estimate of how
-                long it will take to read your text. <br />
-                <strong>Text Formatting :</strong> Easily convert text to
-                uppercase or lowercase. <br />
-                <strong>Clean Text :</strong> Remove extra spaces and tidy up
-                your text. <br />
-                <strong>Copy to Clipboard :</strong> Quickly copy your text to
-                use in other applications. <br />
+                However, due to the restrictions of the free version of the API, we have created a static app that fetches data from JSON files to ensure you can access news effortlessly.
                 <br />
-                With our app, you can analyze and enhance your text with ease.
-                Give it a try and experience the difference!
+                Here's what News Reaper offers:
+                <br />
+                <strong>Breaking News:</strong> Stay updated with the latest breaking news.
+                <br />
+                <strong>In-Depth Coverage:</strong> Dive deep into stories that matter to you.
+                <br />
+                <strong>Customizable News Feeds:</strong> Personalize your news experience.
+                <br />
+                <strong>Real-time Updates:</strong> Get news as it happens.
+                <br />
+                <strong>User-Friendly Interface:</strong> Our app is easy and intuitive to use.
+                <br />
+                <br />
+                Explore the world of news with News Reaper!
               </div>
             </div>
           </div>
@@ -70,7 +68,7 @@ export default function About(props) {
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                Meet Our Team
+                Meet the News Reaper Team
               </button>
             </h2>
             <div
@@ -80,13 +78,11 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                Our app is the result of hard work and dedication from a
-                passionate team of developers and text enthusiasts. <br />
-                Allow us to introduce ourselves : <br />
-                <strong>Mobasshir Rahman</strong> : Although I am a lone member
-                of the team , I have good grasp of basic concepts and
-                profeciency in HTML , CSS , Vanilla JS and React which I used in
-                making this app.
+                News Reaper is brought to you by a dedicated team of developers and news enthusiasts.
+                <br />
+                Meet our team member:
+                <br />
+                <strong>Mobasshir Rahman:</strong> As the sole member of our team, I've utilized my expertise in web development to create News Reaper.
               </div>
             </div>
           </div>
@@ -111,11 +107,9 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                {">"} At Text Analyzer, we're continuously working to improve
-                and expand our app. <br /> {">"} We're committed to creating
-                innovative solutions to simplify your text-related tasks. <br />{" "}
-                {">"} We strive to make your experience with our app the best it
-                can be.
+                {">"} At News Reaper, we're dedicated to delivering the latest news to you.
+                <br /> {">"} We are committed to providing reliable and up-to-date news.
+                <br /> {">"} Your trust in us drives us to excel in our mission.
               </div>
             </div>
           </div>
@@ -140,17 +134,17 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                We appreciate your trust in News Reaper. <br /> Our mission is to
-                provide you with a powerful and user-friendly text analysis
-                tool. <br />
-                Here's a quick recap : <br />
-                Analyze text with ease using our app's features. <br />
-                Meet our dedicated team. <br />
-                Stay connected with our community and support. <br />
+                We appreciate your trust in News Reaper. Our mission is to provide you with the latest news in an easy-to-use format.
                 <br />
-                Ready to get started? Try <strong>News Reaper</strong> today and
-                take your text analysis to the next level. <br />
-                Thank you for being a part of our journey!
+                Here's a quick summary:
+                <br />
+                - Stay informed with our app.
+                <br />
+                - Meet our dedicated team.
+                <br />
+                - Join our community for news discussions.
+                <br />
+                Get started with <strong>News Reaper</strong> today and stay informed!
               </div>
             </div>
           </div>
@@ -165,7 +159,7 @@ export default function About(props) {
                 aria-expanded="false"
                 aria-controls="collapseFive"
               >
-                Check out my other Projects
+                Explore More
               </button>
             </h2>
             <div
@@ -175,12 +169,13 @@ export default function About(props) {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                Do check my <strong>Project showcase</strong> where I keep my
-                projects as a form of personal trophies. <br />
-                Visit the link below : <br />
+                Discover our other projects and explore our portfolio of work:
+                <br />
+                Visit our <strong>Project Showcase</strong>:
+                <br />
                 <a target="_blank" rel="noopener noreferrer" href="https://mr-showcase.netlify.app/">
                   <button className="btn btn-primary m-2">
-                    Project ShowCase
+                    Project Showcase
                   </button>
                 </a>
               </div>
